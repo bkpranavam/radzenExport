@@ -1,0 +1,82 @@
+@page "/emplyee-tables"
+
+<PageTitle>EmplyeeTables</PageTitle>
+<div class="row" style="margin-bottom: 1rem">
+    <div class="col-12 col-md-6">
+        <RadzenText Text="EmplyeeTables" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+    </div>
+    <div class="col-12 col-md-6 justify-content-start justify-content-md-end" style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem">
+    <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+        <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+        <RadzenSplitButtonItem Text="CSV" Value="csv" />
+    </RadzenSplitButton>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+    <RadzenCard style="height: 100%">
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="false"
+            Data="@emplyeeTables"    TItem="Testgridexport.Models.Test.EmplyeeTable" >
+            <Columns>
+                <RadzenDataGridColumn TItem="Testgridexport.Models.Test.EmplyeeTable" Property="Id" Title="Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Testgridexport.Models.Test.EmplyeeTable" Property="Name" Title="Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Testgridexport.Models.Test.EmplyeeTable" Property="Address" Title="Address">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Testgridexport.Models.Test.EmplyeeTable" Property="Phone" Title="Phone">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Testgridexport.Models.Test.EmplyeeTable" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="emplyeeTable">
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenCard>
+    </div>
+        <div class="col-md-6">
+        <RadzenCard style="height: 100%;margin-top:0px;">
+            <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save EmplyeeTable</RadzenAlert>
+            <RadzenTemplateForm TItem="Testgridexport.Models.Test.EmplyeeTable" Data="@emplyeeTable" Visible="@(emplyeeTable != null)" Submit="@FormSubmit">
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Id" Component="Id" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@emplyeeTable.Id" Name="Id" />
+                        <RadzenRequiredValidator Component="Id" Text="Id is required" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Name" Component="Name" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@emplyeeTable.Name" Name="Name" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Address" Component="Address" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@emplyeeTable.Address" Name="Address" />
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="Phone" Component="Phone" style="width: 100%" />
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@emplyeeTable.Phone" Name="Phone" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-end" style="margin-top: 1rem">
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Style="margin-right: 0.5rem" Variant="Variant.Flat" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick" Visible=false />
+                    </div>
+                </div>
+            </RadzenTemplateForm>
+        </RadzenCard>
+        </div></div>
